@@ -10,13 +10,6 @@ if [ ! -f "$SOURCE" ]; then
     exit 1
 fi
 
-# Create backup if destination already exists
-if [ -f "$DEST" ]; then
-    BACKUP="${DEST}.backup.$(date +%Y%m%d_%H%M%S)"
-    cp "$DEST" "$BACKUP"
-    echo "Created backup: $BACKUP"
-fi
-
 # Copy the file
 cp "$SOURCE" "$DEST"
 

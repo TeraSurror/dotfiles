@@ -112,6 +112,12 @@ export PATH=/Users/harshshelar/.opencode/bin:$PATH
 # bun completions
 [ -s "/Users/harshshelar/.bun/_bun" ] && source "/Users/harshshelar/.bun/_bun"
 
+# Git aliases
+alias gs="git status"          # Show working tree status
+alias push="git push"          # Push to remote repository
+alias pull="git pull"          # Pull from remote repository
+alias gaa="git add ."            # Add file contents to index
+
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
