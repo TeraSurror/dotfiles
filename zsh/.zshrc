@@ -92,7 +92,7 @@ fi
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # NVM setup
-export NVM_DIR="$HOME/.nvm" 
+export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 
 # Directory finder function
@@ -121,3 +121,8 @@ alias gaa="git add ."            # Add file contents to index
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+# Start tmux automatically when opening a terminal
+if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
+  tmux attach-session -t main || tmux new-session -s main
+fi
