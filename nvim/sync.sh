@@ -1,27 +1,28 @@
 #!/bin/bash
 
-# Script to sync init.lua from project to nvim config directory
+# Script to sync nvim configuration from project to nvim config directory
 
 PROJECT_DIR="/Users/harshshelar/Desktop/Projects/dotfiles"
-NVIM_FILE="$PROJECT_DIR/nvim/init.lua"
+NVIM_PROJECT_DIR="$PROJECT_DIR/nvim"
 NVIM_CONFIG_DIR="$HOME/.config/nvim"
-NVIM_CONFIG_FILE="$NVIM_CONFIG_DIR/init.lua"
 
-# Check if the init.lua file exists in project
-if [ ! -f "$NVIM_FILE" ]; then
-    echo "Error: init.lua not found in $PROJECT_DIR/nvim/"
+# Check if the nvim directory exists in project
+if [ ! -d "$NVIM_PROJECT_DIR" ]; then
+    echo "Error: nvim directory not found in $PROJECT_DIR/"
     exit 1
 fi
 
 # Create nvim config directory if it doesn't exist
 mkdir -p "$NVIM_CONFIG_DIR"
 
-# Copy to nvim config directory
-cp "$NVIM_FILE" "$NVIM_CONFIG_FILE"
+# Copy entire nvim directory structure to config directory
+rsync -av --delete "$NVIM_PROJECT_DIR/" "$NVIM_CONFIG_DIR/" --exclude="sync.sh"
 
 if [ $? -eq 0 ]; then
-    echo "Successfully synced init.lua to nvim config directory"
+    echo "Successfully synced nvim configuration to $NVIM_CONFIG_DIR"
 else
-    echo "Error: Failed to copy init.lua"
+    echo "Error: Failed to sync nvim configuration"
     exit 1
 fi
+
+
