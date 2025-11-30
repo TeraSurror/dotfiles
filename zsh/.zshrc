@@ -115,8 +115,9 @@ export PATH=/Users/harshshelar/.opencode/bin:$PATH
 # Git aliases
 alias gs="git status"          # Show working tree status
 alias push="git push"          # Push to remote repository
-alias pull="git pull"          # Pull from remote repository
+alias pull=" pull"          # Pull from remote repository
 alias gaa="git add ."            # Add file contents to index
+alias gc="git commit -m $2"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
