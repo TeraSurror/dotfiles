@@ -119,6 +119,9 @@ alias pull=" pull"          # Pull from remote repository
 alias gaa="git add ."            # Add file contents to index
 alias gc="git commit -m $2"
 
+# Unix command aliases
+alias ls="lsd -la"
+
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
