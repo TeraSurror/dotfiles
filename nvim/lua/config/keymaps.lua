@@ -69,4 +69,10 @@ keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Scroll up and center" })
 keymap.set("n", "n", "nzzzv", { desc = "Next search result and center" })
 keymap.set("n", "N", "Nzzzv", { desc = "Previous search result and center" })
 
+-- Diagnostic navigation and error messages
+keymap.set("n", "gE", function() vim.diagnostic.open_float() end, { desc = "Show error message under cursor" })
+keymap.set("n", "[d", function() vim.diagnostic.goto_prev() end, { desc = "Previous diagnostic" })
+keymap.set("n", "]d", function() vim.diagnostic.goto_next() end, { desc = "Next diagnostic" })
+keymap.set("n", "<leader>d", function() vim.diagnostic.setloclist() end, { desc = "Open diagnostics list" })
+
 return {}

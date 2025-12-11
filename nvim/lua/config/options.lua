@@ -70,4 +70,13 @@ opt.lazyredraw = true
 -- Show matching brackets
 opt.showmatch = true
 
+-- Configure diagnostic appearance
+vim.diagnostic.config({
+  virtual_text = false,        -- Disable inline error text
+  signs = true,                -- Keep gutter signs
+  underline = true,            -- Enable underlines
+  update_in_insert = false,
+  severity_sort = true,
+})
+
 return {}
