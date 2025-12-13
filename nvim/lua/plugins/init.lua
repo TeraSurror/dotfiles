@@ -2,11 +2,15 @@
 return {
   -- Theme
   {
-    "folke/tokyonight.nvim",
+    "ydkulks/cursor-dark.nvim",
     lazy = false,
     priority = 1000,
     config = function()
-      vim.cmd([[colorscheme tokyonight-night]])
+      -- vim.cmd.colorscheme("cursor-dark-midnight")
+      require("cursor-dark").setup({
+        -- For theme
+        style = "dark",
+      })
     end,
   },
 
@@ -198,7 +202,7 @@ return {
     config = function()
       require("lualine").setup({
         options = {
-          theme = "tokyonight",
+          -- theme = "tokyonight",
           component_separators = { left = "|", right = "|" },
           section_separators = { left = "", right = "" },
         },
@@ -220,7 +224,7 @@ return {
     event = "InsertEnter",
     config = function()
       require("nvim-autopairs").setup({})
-      local cmp_autopairs = require("nvm-autopairs.completion.cmp")
+      local cmp_autopairs = require("nvim-autopairs.completion.cmp")
       local cmp = require("cmp")
       cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
     end,
