@@ -12,6 +12,13 @@ return {
     end,
   },
 
+  -- Auto close/rename JSX tags
+  {
+    "windwp/nvim-ts-autotag",
+    event = { "BufReadPre", "BufNewFile" },
+    opts = {},
+  },
+
   -- Comment plugin
   {
     "numToStr/Comment.nvim",

@@ -25,10 +25,12 @@ return {
     config = function()
       require("mason-lspconfig").setup({
         ensure_installed = {
-          "clangd",      -- C/C++
-          "pyright",     -- Python
-          "ts_ls",       -- TypeScript/JavaScript
-          "gopls",       -- Go
+          "clangd",           -- C/C++
+          "pyright",          -- Python
+          "ts_ls",            -- TypeScript/JavaScript
+          "gopls",            -- Go
+          "eslint",           -- ESLint for JS/TS linting
+          "tailwindcss",      -- Tailwind CSS
         },
         automatic_installation = true,
       })

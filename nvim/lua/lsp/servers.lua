@@ -68,5 +68,51 @@ vim.lsp.config.gopls = {
   },
 }
 
+-- ESLint
+vim.lsp.config.eslint = {
+  capabilities = lsp.capabilities,
+  filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
+  root_markers = { ".eslintrc", ".eslintrc.js", ".eslintrc.cjs", ".eslintrc.json", ".eslintrc.yaml", ".eslintrc.yml", "eslint.config.js", "eslint.config.mjs", "eslint.config.cjs", "package.json" },
+  settings = {
+    codeAction = {
+      disableRuleComment = {
+        enable = true,
+        location = "separateLine",
+      },
+      showDocumentation = {
+        enable = true,
+      },
+    },
+    codeActionOnSave = {
+      enable = true,
+      mode = "all",
+    },
+    format = false, -- Let Prettier handle formatting
+    run = "onType",
+  },
+}
+
+-- Tailwind CSS
+vim.lsp.config.tailwindcss = {
+  capabilities = lsp.capabilities,
+  filetypes = { "html", "css", "scss", "javascript", "javascriptreact", "typescript", "typescriptreact" },
+  root_markers = { "tailwind.config.js", "tailwind.config.cjs", "tailwind.config.mjs", "tailwind.config.ts" },
+  settings = {
+    tailwindCSS = {
+      classAttributes = { "class", "className", "classList", "ngClass" },
+      lint = {
+        cssConflict = "warning",
+        invalidApply = "error",
+        invalidConfigPath = "error",
+        invalidScreen = "error",
+        invalidTailwindDirective = "error",
+        invalidVariant = "error",
+        recommendedVariantOrder = "warning",
+      },
+      validate = true,
+    },
+  },
+}
+
 -- Enable the LSP servers
-vim.lsp.enable({ "clangd", "pyright", "ts_ls", "gopls" })
+vim.lsp.enable({ "clangd", "pyright", "ts_ls", "gopls", "eslint", "tailwindcss" })

@@ -76,6 +76,16 @@ autocmd("FileType", {
   desc = "JavaScript/TypeScript specific settings",
 })
 
+-- ESLint fix on save for JS/TS files
+autocmd("BufWritePre", {
+  group = filetype_settings,
+  pattern = { "*.js", "*.jsx", "*.ts", "*.tsx" },
+  callback = function()
+    vim.cmd("silent! EslintFixAll")
+  end,
+  desc = "ESLint fix on save",
+})
+
 -- Go settings
 autocmd("FileType", {
   group = filetype_settings,
