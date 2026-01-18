@@ -1,6 +1,6 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
-export PATH="usr/local/bin:$PATH:$HOME/go/bin:$HOMEBREW_PREFIX/opt/postgresql@15/bin"
+export PATH="/usr/local/bin:$PATH:$HOME/go/bin:$HOMEBREW_PREFIX/opt/postgresql@15/bin"
 
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -91,9 +91,18 @@ fi
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# NVM setup
+# NVM setup (lazy-loaded for faster startup)
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
+
+nvm() {
+  unfunction nvm node npm npx 2>/dev/null
+  [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+  nvm "$@"
+}
+node() { nvm && node "$@"; }
+npm() { nvm && npm "$@"; }
+npx() { nvm && npx "$@"; }
 
 # Directory finder function
 fdd() {
@@ -102,7 +111,11 @@ fdd() {
 }
 
 . "$HOME/.local/bin/env"
-eval "$(uv generate-shell-completion zsh)"
+# Cached uv completion for faster startup
+if [[ ! -f ~/.zsh_uv_completion ]] || [[ $(which uv) -nt ~/.zsh_uv_completion ]]; then
+  uv generate-shell-completion zsh > ~/.zsh_uv_completion
+fi
+source ~/.zsh_uv_completion
 
 [[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
 
@@ -113,11 +126,12 @@ export PATH=/Users/harshshelar/.opencode/bin:$PATH
 [ -s "/Users/harshshelar/.bun/_bun" ] && source "/Users/harshshelar/.bun/_bun"
 
 # Git aliases
-alias gs="git status"          # Show working tree status
-alias push="git push"          # Push to remote repository
-alias pull=" pull"          # Pull from remote repository
-alias gaa="git add ."            # Add file contents to index
-alias gc="git commit -m $2"
+alias gs="git status"
+alias push="git push"
+alias pull="git pull"
+alias gaa="git add ."
+unalias gc 2>/dev/null
+gc() { git commit -m "$1"; }
 
 # Unix command aliases
 alias ls="lsd -la"
