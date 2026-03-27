@@ -5,7 +5,7 @@ return {
   lazy = false,
   config = function()
     require("nvim-treesitter").setup({
-      ensure_install = { "c", "cpp", "python", "javascript", "typescript", "tsx", "go", "lua", "vim", "vimdoc", "html", "css", "json" },
+      ensure_install = { "c", "cpp", "python", "javascript", "typescript", "tsx", "go", "rust", "lua", "vim", "vimdoc", "html", "css", "json" },
     })
 
     -- Enable treesitter-based highlighting

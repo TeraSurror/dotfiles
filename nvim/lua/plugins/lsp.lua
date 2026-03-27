@@ -31,6 +31,7 @@ return {
           "gopls",            -- Go
           "eslint",           -- ESLint for JS/TS linting
           "tailwindcss",      -- Tailwind CSS
+          "rust_analyzer",    -- Rust
         },
         automatic_installation = true,
       })

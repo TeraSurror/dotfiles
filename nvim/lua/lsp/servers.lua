@@ -114,5 +114,30 @@ vim.lsp.config.tailwindcss = {
   },
 }
 
+-- Rust
+vim.lsp.config.rust_analyzer = {
+  capabilities = lsp.capabilities,
+  filetypes = { "rust" },
+  root_markers = { "Cargo.toml", "Cargo.lock", ".git" },
+  settings = {
+    ["rust-analyzer"] = {
+      cargo = {
+        allFeatures = true,
+        loadOutDirsFromCheck = true,
+      },
+      checkOnSave = {
+        command = "clippy",
+      },
+      inlayHints = {
+        bindingModeHints = { enable = true },
+        chainingHints = { enable = true },
+        closureReturnTypeHints = { enable = "always" },
+        parameterHints = { enable = true },
+        typeHints = { enable = true },
+      },
+    },
+  },
+}
+
 -- Enable the LSP servers
-vim.lsp.enable({ "clangd", "pyright", "ts_ls", "gopls", "eslint", "tailwindcss" })
+vim.lsp.enable({ "clangd", "pyright", "ts_ls", "gopls", "eslint", "tailwindcss", "rust_analyzer" })
