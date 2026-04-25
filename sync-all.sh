@@ -35,6 +35,7 @@ run_sync() {
 run_sync "nvim"
 run_sync "tmux"  
 run_sync "zsh"
+run_sync "claude"
 
 echo "=== All sync operations completed ==="
 echo "Note: Some changes may require terminal restart or reload to take effect"
