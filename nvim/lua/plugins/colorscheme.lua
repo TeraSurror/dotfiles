@@ -1,13 +1,13 @@
 -- Colorscheme configuration
 return {
-  "folke/tokyonight.nvim",
+  "rebelot/kanagawa.nvim",
   lazy = false,
   priority = 1000,
   opts = {
-    style = "night",
+    theme = "dragon",
   },
   config = function(_, opts)
-    require("tokyonight").setup(opts)
-    vim.cmd([[colorscheme tokyonight-night]])
+    require("kanagawa").setup(opts)
+    vim.cmd([[colorscheme kanagawa-dragon]])
   end,
 }
