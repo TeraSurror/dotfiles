@@ -1,70 +1,69 @@
--- Global keymaps configuration
-local keymap = vim.keymap
+-- ============================================================================
+-- Global Core Keymaps
+-- ============================================================================
 
--- General keymaps
-keymap.set("i", "jk", "<ESC>", { desc = "Exit insert mode" })
-keymap.set("n", "<leader>nh", ":nohl<CR>", { desc = "Clear search highlights" })
+local map = vim.keymap.set
 
--- Window management
-keymap.set("n", "<leader>sv", "<C-w>v", { desc = "Split window vertically" })
-keymap.set("n", "<leader>sh", "<C-w>s", { desc = "Split window horizontally" })
-keymap.set("n", "<leader>se", "<C-w>=", { desc = "Make splits equal size" })
-keymap.set("n", "<leader>sx", "<cmd>close<CR>", { desc = "Close current split" })
+-- Quick escape
+map("i", "jk", "<ESC>", { desc = "Exit insert mode" })
+map("i", "jj", "<ESC>", { desc = "Exit insert mode" })
 
--- Window navigation
-keymap.set("n", "<C-h>", "<C-w>h", { desc = "Move to left window" })
-keymap.set("n", "<C-j>", "<C-w>j", { desc = "Move to bottom window" })
-keymap.set("n", "<C-k>", "<C-w>k", { desc = "Move to top window" })
-keymap.set("n", "<C-l>", "<C-w>l", { desc = "Move to right window" })
+-- Clear search highlights on escape
+map("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear search highlights" })
+map("n", "<leader>nh", "<cmd>nohlsearch<CR>", { desc = "Clear search highlights" })
 
--- Resize windows
-keymap.set("n", "<C-Up>", ":resize +2<CR>", { desc = "Increase window height" })
-keymap.set("n", "<C-Down>", ":resize -2<CR>", { desc = "Decrease window height" })
-keymap.set("n", "<C-Left>", ":vertical resize -2<CR>", { desc = "Decrease window width" })
-keymap.set("n", "<C-Right>", ":vertical resize +2<CR>", { desc = "Increase window width" })
+-- Quick Save & Quit
+map({ "n", "i", "v" }, "<C-s>", "<cmd>w<CR>", { desc = "Save file" })
+map("n", "<leader>w", "<cmd>w<CR>", { desc = "Save file" })
+map("n", "<leader>q", "<cmd>q<CR>", { desc = "Quit window" })
+map("n", "<leader>Q", "<cmd>qa!<CR>", { desc = "Quit Neovim without saving" })
 
--- Buffer management
-keymap.set("n", "<leader>bd", ":bdelete<CR>", { desc = "Delete buffer" })
-keymap.set("n", "<Tab>", ":bnext<CR>", { desc = "Next buffer" })
-keymap.set("n", "<S-Tab>", ":bprevious<CR>", { desc = "Previous buffer" })
+-- Better Window Splits & Sizing
+map("n", "<leader>sv", "<C-w>v", { desc = "Split window vertically" })
+map("n", "<leader>sh", "<C-w>s", { desc = "Split window horizontally" })
+map("n", "<leader>se", "<C-w>=", { desc = "Make splits equal size" })
+map("n", "<leader>sx", "<cmd>close<CR>", { desc = "Close current split" })
 
--- Better indenting
-keymap.set("v", "<", "<gv", { desc = "Indent left" })
-keymap.set("v", ">", ">gv", { desc = "Indent right" })
+-- Resize windows with arrows
+map("n", "<C-Up>", "<cmd>resize +2<CR>", { desc = "Increase window height" })
+map("n", "<C-Down>", "<cmd>resize -2<CR>", { desc = "Decrease window height" })
+map("n", "<C-Left>", "<cmd>vertical resize -2<CR>", { desc = "Decrease window width" })
+map("n", "<C-Right>", "<cmd>vertical resize +2<CR>", { desc = "Increase window width" })
 
--- Move text up and down
-keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move text down" })
-keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move text up" })
+-- Buffer Navigation
+map("n", "<Tab>", "<cmd>bnext<CR>", { desc = "Next buffer" })
+map("n", "<S-Tab>", "<cmd>bprevious<CR>", { desc = "Previous buffer" })
+map("n", "]b", "<cmd>bnext<CR>", { desc = "Next buffer" })
+map("n", "[b", "<cmd>bprevious<CR>", { desc = "Previous buffer" })
+map("n", "<leader>bd", "<cmd>bdelete<CR>", { desc = "Close current buffer" })
+map("n", "<leader>bD", "<cmd>bdelete!<CR>", { desc = "Force close buffer" })
+map("n", "<leader>bo", "<cmd>%bd|e#|bd#<CR>", { desc = "Close all other buffers" })
 
--- File explorer (nvim-tree)
-keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>", { desc = "Toggle file explorer" })
+-- Better Visual Mode Indenting (keeps selection active)
+map("v", "<", "<gv", { desc = "Indent left" })
+map("v", ">", ">gv", { desc = "Indent right" })
 
--- Telescope
-keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Find files" })
-keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = "Live grep" })
-keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>", { desc = "Find buffers" })
-keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { desc = "Help tags" })
-keymap.set("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", { desc = "Recent files" })
+-- Move Selected Lines Up / Down
+map("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move lines down" })
+map("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move lines up" })
 
--- Git
-keymap.set("n", "<leader>gs", ":Git<CR>", { desc = "Git status" })
-keymap.set("n", "<leader>gc", ":Git commit<CR>", { desc = "Git commit" })
-keymap.set("n", "<leader>gp", ":Git push<CR>", { desc = "Git push" })
+-- Better Paste (prevents replaced text from polluting clipboard)
+map("v", "p", '"_dP', { desc = "Paste without overwriting register" })
 
--- Terminal
-keymap.set("n", "<leader>tt", ":ToggleTerm<CR>", { desc = "Toggle terminal" })
-keymap.set("t", "<C-x>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+-- Keep cursor centered during navigation
+map("n", "<C-d>", "<C-d>zz", { desc = "Scroll down and center" })
+map("n", "<C-u>", "<C-u>zz", { desc = "Scroll up and center" })
+map("n", "n", "nzzzv", { desc = "Next search match (centered)" })
+map("n", "N", "Nzzzv", { desc = "Prev search match (centered)" })
+map("n", "G", "Gzz", { desc = "Go to bottom (centered)" })
 
--- Save and quit
-keymap.set("n", "<leader>w", ":w<CR>", { desc = "Save file" })
-keymap.set("n", "<leader>q", ":q<CR>", { desc = "Quit" })
-keymap.set("n", "<leader>wq", ":wq<CR>", { desc = "Save and quit" })
+-- Quickfix & Location list navigation
+map("n", "]q", "<cmd>cnext<CR>zz", { desc = "Next quickfix item" })
+map("n", "[q", "<cmd>cprev<CR>zz", { desc = "Prev quickfix item" })
+map("n", "<leader>qo", "<cmd>copen<CR>", { desc = "Open quickfix window" })
+map("n", "<leader>qc", "<cmd>cclose<CR>", { desc = "Close quickfix window" })
 
--- Better paste
-keymap.set("v", "p", '"_dP', { desc = "Paste without yanking" })
-
--- Center screen when navigating
-keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Scroll down and center" })
-keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Scroll up and center" })
-keymap.set("n", "n", "nzzzv", { desc = "Next search result and center" })
-keymap.set("n", "N", "Nzzzv", { desc = "Previous search result and center" })
+-- Diagnostic navigation fallback (overridden by LSP on attach)
+map("n", "]d", vim.diagnostic.goto_next, { desc = "Next diagnostic" })
+map("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous diagnostic" })
+map("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line diagnostics" })
